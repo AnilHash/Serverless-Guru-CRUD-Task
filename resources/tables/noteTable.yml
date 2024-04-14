@@ -1,10 +1,10 @@
-Type: AWS::DynamoDB::Table
+Type: AWS::DynamoDB::Table # Resource type
 Properties:
-  TableName: notes-${self:provider.stage}-Table
-  BillingMode: PAY_PER_REQUEST
-  KeySchema:
-    - AttributeName: id
-      KeyType: HASH
-  AttributeDefinitions:
-    - AttributeName: id
-      AttributeType: S
+  TableName: notes-${self:provider.stage}-Table # Table name with stage prefix
+  BillingMode: PAY_PER_REQUEST # Billing mode set to PAY_PER_REQUEST for auto-scaling
+  KeySchema: # Key schema for the table
+    - AttributeName: id # Primary key attribute name
+      KeyType: HASH # HASH type for the primary key
+  AttributeDefinitions: # Attribute definitions for the table
+    - AttributeName: id # Attribute name
+      AttributeType: S # Attribute type (String)

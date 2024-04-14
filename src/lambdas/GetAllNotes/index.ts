@@ -9,9 +9,13 @@ export const handler: Handler = async (
   event: APIGatewayProxyEvent,
   ctx: Context
 ) => {
+  // Configure Lambda to not wait for the event loop to be empty
   ctx.callbackWaitsForEmptyEventLoop = false;
+
   console.log("[INFO] Event object for get all notes API", event);
+
   try {
+    // Create parameters for scanning all items in the DynamoDB table
     const params: ScanCommand = new ScanCommand({
       TableName: TABLE_NAME,
     });
@@ -19,6 +23,7 @@ export const handler: Handler = async (
     const result: ScanCommandOutput = await dbClient.send(params);
 
     console.log("[INFO] All notes are here", result);
+
     return send(
       200,
       JSON.stringify({
