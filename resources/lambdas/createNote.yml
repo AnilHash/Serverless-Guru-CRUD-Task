@@ -1,11 +1,11 @@
-handler: src/lambdas/CreateNote/index.handler
+handler: src/lambdas/CreateNote/index.handler # Path to the Lambda handler
 events:
-  - http:
-      path: notes
-      method: post
-      cors: true
-iamRoleStatements:
-  - Effect: Allow
+  - http: # HTTP event trigger
+      path: notes # API endpoint path
+      method: post # HTTP method
+      cors: true # Enable CORS for this endpoint
+iamRoleStatements: # IAM role permissions for the Lambda function
+  - Effect: Allow # Allow effect
     Action:
-      - dynamodb:PutItem
-    Resource: !GetAtt notesTable.Arn
+      - dynamodb:PutItem # Permission to put items into DynamoDB table
+    Resource: !GetAtt notesTable.Arn # ARN of the DynamoDB table

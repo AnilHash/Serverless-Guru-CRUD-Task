@@ -1,11 +1,11 @@
-handler: src/lambdas/DeleteNote/index.handler
+handler: src/lambdas/DeleteNote/index.handler # Path to the Lambda handler
 events:
-  - http:
-      path: notes/{id}
-      method: delete
-      cors: true
-iamRoleStatements:
-  - Effect: Allow
+  - http: # HTTP event trigger
+      path: notes/{id} # API endpoint path with a path parameter for the note ID
+      method: delete # HTTP DELETE method
+      cors: true # Enable CORS for this endpoint
+iamRoleStatements: # IAM role permissions for the Lambda function
+  - Effect: Allow # Allow effect
     Action:
-      - dynamodb:DeleteItem
-    Resource: !GetAtt notesTable.Arn
+      - dynamodb:DeleteItem # Permission to delete items from the DynamoDB table
+    Resource: !GetAtt notesTable.Arn # ARN of the DynamoDB table

@@ -4,22 +4,22 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs18.x
-  region: ${opt:region, 'us-east-1'}
-  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-east-1'} # Default region is us-east-1
+  stage: ${opt:stage, 'dev'} # Default stage is dev
   environment:
-    NOTES_TABLE: !Ref notesTable
+    NOTES_TABLE: !Ref notesTable # Reference to the notesTable resource
 
 plugins:
-  - serverless-plugin-typescript
-  - serverless-iam-roles-per-function
+  - serverless-plugin-typescript # TypeScript plugin for Serverless
+  - serverless-iam-roles-per-function # Plugin for managing IAM roles per function
 
 functions:
-  createNote: ${file(./resources/lambdas/createNote.yml)}
-  updateNote: ${file(./resources/lambdas/updateNote.yml)}
-  deleteNote: ${file(./resources/lambdas/deleteNote.yml)}
-  getNote: ${file(./resources/lambdas/getNote.yml)}
-  getAllNotes: ${file(./resources/lambdas/getAllNotes.yml)}
+  createNote: ${file(./resources/lambdas/createNote.yml)} # Create Note Lambda function
+  updateNote: ${file(./resources/lambdas/updateNote.yml)} # Update Note Lambda function
+  deleteNote: ${file(./resources/lambdas/deleteNote.yml)} # Delete Note Lambda function
+  getNote: ${file(./resources/lambdas/getNote.yml)} # Get Note Lambda function
+  getAllNotes: ${file(./resources/lambdas/getAllNotes.yml)} # Get All Notes Lambda function
 
 resources:
   Resources:
-    notesTable: ${file(./resources/tables/noteTable.yml)}
+    notesTable: ${file(./resources/tables/noteTable.yml)} # DynamoDB table resource for storing notes

@@ -1,11 +1,13 @@
-handler: src/lambdas/GetNote/index.handler
-events:
-  - http:
-      path: notes/{id}
-      method: get
-      cors: true
-iamRoleStatements:
-  - Effect: Allow
-    Action:
-      - dynamodb:GetItem
-    Resource: !GetAtt notesTable.Arn
+functions:
+  getNote: # Name of the Lambda function
+    handler: src/lambdas/GetNote/index.handler # Path to the Lambda handler
+    events:
+      - http: # HTTP event trigger
+          path: notes/{id} # API endpoint path with a path parameter for the note ID
+          method: get # HTTP GET method
+          cors: true # Enable CORS for this endpoint
+    iamRoleStatements: # IAM role permissions for the Lambda function
+      - Effect: Allow # Allow effect
+        Action:
+          - dynamodb:GetItem # Permission to get items from the DynamoDB table
+        Resource: !GetAtt notesTable.Arn # ARN of the DynamoDB table
