@@ -13,6 +13,14 @@ plugins:
   - serverless-plugin-typescript # TypeScript plugin for Serverless
   - serverless-iam-roles-per-function # Plugin for managing IAM roles per function
 
+package:
+  individually: true
+  patterns:
+    - "!screenshots/**"
+    - "!layers/**"
+    - "!node_modules/**"
+    - "!package.json"
+
 functions:
   createNote: ${file(./resources/lambdas/createNote.yml)} # Create Note Lambda function
   updateNote: ${file(./resources/lambdas/updateNote.yml)} # Update Note Lambda function
