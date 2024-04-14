@@ -1,0 +1,11 @@
+handler: src/lambdas/UpdateNote/index.handler
+events:
+  - http:
+      path: notes/{id}
+      method: put
+      cors: true
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:UpdateItem
+    Resource: !GetAtt notesTable.Arn

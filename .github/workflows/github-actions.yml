@@ -1,0 +1,43 @@
+name: sls-guru-task
+
+on:
+  push:
+    branches:
+      - dev
+      - prod
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Serverless Framework
+        run: npm install -g serverless
+
+      - name: install the dependencies
+        run: npm install
+
+      # - name: Run Test Cases and Coverage
+      #   run: npm test
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID}}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy Stack To DEV Environment
+        if: endsWith(github.ref, '/dev')
+        run: serverless deploy --stage dev
+
+      - name: Deploy Stack To Prod Environment
+        if: endsWith(github.ref, '/prod')
+        run: serverless deploy --stage prod

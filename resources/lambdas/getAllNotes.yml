@@ -1,0 +1,11 @@
+handler: src/lambdas/GetAllNotes/index.handler
+events:
+  - http:
+      path: notes
+      method: get
+      cors: true
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:Scan
+    Resource: !GetAtt notesTable.Arn

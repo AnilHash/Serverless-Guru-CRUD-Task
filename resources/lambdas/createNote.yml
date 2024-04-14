@@ -1,0 +1,11 @@
+handler: src/lambdas/CreateNote/index.handler
+events:
+  - http:
+      path: notes
+      method: post
+      cors: true
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:PutItem
+    Resource: !GetAtt notesTable.Arn

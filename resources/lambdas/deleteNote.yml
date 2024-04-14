@@ -1,0 +1,11 @@
+handler: src/lambdas/DeleteNote/index.handler
+events:
+  - http:
+      path: notes/{id}
+      method: delete
+      cors: true
+iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DeleteItem
+    Resource: !GetAtt notesTable.Arn

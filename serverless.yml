@@ -1,0 +1,25 @@
+service: Serverless-Guru-CRUD-Task
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'dev'}
+  environment:
+    NOTES_TABLE: !Ref notesTable
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-iam-roles-per-function
+
+functions:
+  createNote: ${file(./resources/lambdas/createNote.yml)}
+  updateNote: ${file(./resources/lambdas/updateNote.yml)}
+  deleteNote: ${file(./resources/lambdas/deleteNote.yml)}
+  getNote: ${file(./resources/lambdas/getNote.yml)}
+  getAllNotes: ${file(./resources/lambdas/getAllNotes.yml)}
+
+resources:
+  Resources:
+    notesTable: ${file(./resources/tables/noteTable.yml)}
