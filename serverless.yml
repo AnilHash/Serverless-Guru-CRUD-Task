@@ -16,9 +16,7 @@ plugins:
 package:
   individually: true
   patterns:
-    - "!screenshots/**"
-    - "!layers/**"
-    - "!node_modules/**"
+    - "node_modules/**"
     - "!package.json"
 
 functions:
