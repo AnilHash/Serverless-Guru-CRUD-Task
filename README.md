@@ -2,7 +2,13 @@
 
 ## Overview
 
-This project is a serverless CRUD (Create, Read, Update, Delete) application built on AWS Lambda and DynamoDB. It provides API endpoints for managing notes.
+This project is a serverless CRUD (Create, Read, Update, Delete) application built on AWS Lambda and DynamoDB using Serverless Framework as a IaC. It provides API endpoints for managing notes.
+
+`{
+id: string(generated in backend),
+title: string,
+body: string,
+}`
 
 ## Setup
 
@@ -23,6 +29,18 @@ Before running the application, make sure to configure your AWS credentials and 
 ### Deployment
 
 The project can be deployed to AWS using the Serverless Framework. Run `serverless deploy` to deploy the application.
+
+### CICD Test results
+
+![image](./screenshots/CICD-Testing.PNG)
+
+### CICD Dev branch
+
+![image](./screenshots/CICD-dev.PNG)
+
+### CICD Prod branch
+
+![image](./screenshots/CICD-prod.PNG)
 
 ## Code Structure
 
@@ -71,6 +89,16 @@ The project consists of the following main components:
 ## DynamoDB Setup
 
 The DynamoDB table schema is defined in the CloudFormation template `resources/tables/noteTable.yml`. It specifies the table name, key schema, and attribute definitions.
+
+## ✔ Service deployed to stack Serverless-Guru-CRUD-Task-dev
+
+### Here are the Endpoints:
+
+POST - [https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes](https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes)
+PUT - [https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes/{id}](https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes/%7Bid%7D)
+DELETE - [https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes/{id}](https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes/%7Bid%7D)
+GET - [https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes/{id}](https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes/%7Bid%7D)
+GET - [https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes](https://xplz6qv136.execute-api.us-east-1.amazonaws.com/dev/notes)
 
 ## Conclusion
 
