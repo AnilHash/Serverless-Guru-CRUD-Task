@@ -1,72 +1,77 @@
-<!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Project Documentation
 
+## Overview
 
-# Serverless Framework AWS NodeJS Example
+This project is a serverless CRUD (Create, Read, Update, Delete) application built on AWS Lambda and DynamoDB. It provides API endpoints for managing notes.
 
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+## Setup
 
-## Usage
+### Installation
+
+To set up the project locally, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Install dependencies by running `npm install`.
+
+### Configuration
+
+Before running the application, make sure to configure your AWS credentials and environment variables:
+
+1. Configure AWS credentials using AWS CLI or environment variables.
+2. Set up environment variables required by the application. Refer to the `.env.example` file for a list of required variables.
 
 ### Deployment
 
-In order to deploy the example, you need to run the following command:
+The project can be deployed to AWS using the Serverless Framework. Run `serverless deploy` to deploy the application.
 
-```
-$ serverless deploy
-```
+## Code Structure
 
-After running deploy, you should see output similar to:
+The project consists of the following main components:
 
-```bash
-Deploying aws-node-project to stage dev (us-east-1)
+1. **Lambda Functions**: Lambda functions handle the API endpoints for CRUD operations on notes. Each function is located in a separate directory under `src/lambdas`.
 
-✔ Service deployed to stack aws-node-project-dev (112s)
+2. **DynamoDB Table**: The DynamoDB table schema is defined in the `resources/tables/noteTable.yml` file.
 
-functions:
-  hello: aws-node-project-dev-hello (1.5 kB)
-```
+3. **Helper Functions**: Helper functions, such as `send` for sending HTTP responses, are located in the `helpers` directory.
 
-### Invocation
+4. **AWS SDK Setup**: The AWS SDK setup for DynamoDB client is defined in the `table/NotesTable.ts` file.
 
-After successful deployment, you can invoke the deployed function by using the following command:
+## Lambda Functions
 
-```bash
-serverless invoke --function hello
-```
+### 1. Create Note
 
-Which should result in response similar to the following:
+**Handler:** `src/lambdas/CreateNote/index.handler`
 
-```json
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": {}\n}"
-}
-```
+**Description:** Handles HTTP POST requests to create a new note in the DynamoDB table.
 
-### Local development
+### 2. Update Note
 
-You can invoke your function locally by using the following command:
+**Handler:** `src/lambdas/UpdateNote/index.handler`
 
-```bash
-serverless invoke local --function hello
-```
+**Description:** Handles HTTP PUT requests to update an existing note in the DynamoDB table.
 
-Which should result in response similar to the following:
+### 3. Delete Note
 
-```
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
-```
+**Handler:** `src/lambdas/DeleteNote/index.handler`
+
+**Description:** Handles HTTP DELETE requests to delete a note from the DynamoDB table.
+
+### 4. Get Note
+
+**Handler:** `src/lambdas/GetNote/index.handler`
+
+**Description:** Handles HTTP GET requests to retrieve a single note from the DynamoDB table.
+
+### 5. Get All Notes
+
+**Handler:** `src/lambdas/GetAllNotes/index.handler`
+
+**Description:** Handles HTTP GET requests to retrieve all notes from the DynamoDB table.
+
+## DynamoDB Setup
+
+The DynamoDB table schema is defined in the CloudFormation template `resources/tables/noteTable.yml`. It specifies the table name, key schema, and attribute definitions.
+
+## Conclusion
+
+This project provides a serverless API for managing notes using AWS Lambda and DynamoDB. It follows best practices for serverless architecture and can be easily deployed and scaled on AWS.

@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const makeHttpRequest = async (path, method, options) => {
+export const makeHttpRequest = async (path, method, options) => {
   const root = process.env.TEST_ROOT_URL;
   const url = `${root}${path}`;
   const httpReq = agent(method, url);
@@ -27,32 +27,4 @@ const makeHttpRequest = async (path, method, options) => {
       body: null,
     };
   }
-};
-
-export const invoke_createNote = async (path, options) => {
-  //Make an HTTP call
-  const response = await makeHttpRequest(path, "POST", options);
-  return response;
-};
-
-export const invoke_getAllNotes = (path, options) => {
-  //Make an HTTP call
-  const response = makeHttpRequest(path, "GET", options);
-  return response;
-};
-
-export const invoke_updateNote = (path, options) => {
-  //Make an HTTP call
-  const response = makeHttpRequest(path, "PUT", options);
-  return response;
-};
-export const invoke_getNote = (path, options) => {
-  //Make an HTTP call
-  const response = makeHttpRequest(path, "GET", options);
-  return response;
-};
-export const invoke_deleteNote = (path, options) => {
-  //Make an HTTP call
-  const response = makeHttpRequest(path, "DELETE", options);
-  return response;
 };
