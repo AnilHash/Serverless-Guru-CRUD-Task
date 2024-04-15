@@ -25,8 +25,8 @@ jobs:
       - name: install the dependencies
         run: npm install
 
-      # - name: Run Test Cases and Coverage
-      #   run: npm test
+      - name: Run Test Cases and Coverage
+        run: npm test
 
       - uses: aws-actions/configure-aws-credentials@v1
         with:
