@@ -19,6 +19,7 @@ package:
     - "!layers/**"
     - "!node_modules/**"
     - "!package.json"
+    - "!screenshots/**"
 
 functions:
   createNote: ${file(./resources/lambdas/createNote.yml)} # Create Note Lambda function
